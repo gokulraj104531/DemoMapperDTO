@@ -14,13 +14,15 @@ namespace DemoMapperDTO.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        public UserRepoistories userRepostories;
-        public UserServices userServices;
+        private readonly UserRepoistories userRepostories;
+        private readonly UserServices userServices;
 
 
-        public UserController(UserRepoistories _userRepostories)
+        public UserController(UserRepoistories _userRepostories,UserServices User)
         {
             this.userRepostories = _userRepostories;
+            this.userServices =User;
+            
             
         }
 

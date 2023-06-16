@@ -107,6 +107,20 @@ namespace DemoMapperDTO.Controllers
                 return StatusCode(500,ex.Message);
             }
         }
+        [HttpGet, Route("Count")]
+        public int Count()
+        {
+            try
+            {
+                int c = userRepostories.Count();
+                return c;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
 
     }
 }

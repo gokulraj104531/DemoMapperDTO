@@ -88,5 +88,18 @@ namespace DemoMapperDTO.Repositories
                 throw;
             }
         }
+        public int Count()
+        {
+            try
+            {
+                int c = _dbContext.userRegisterations.Count();
+                return c;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

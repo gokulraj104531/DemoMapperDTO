@@ -12,7 +12,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddAutoMapper(typeof(Program));
-builder.Services.AddTransient<UserRepostories>();
+builder.Services.AddTransient<UserServices>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

@@ -14,10 +14,10 @@ namespace DemoMapperDTO.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        public UserRepostories userRepostories;
+        public UserServices userRepostories;
 
 
-        public UserController(UserRepostories _userRepostories)
+        public UserController(UserServices _userRepostories)
         {
             this.userRepostories = _userRepostories;
         }
@@ -112,8 +112,8 @@ namespace DemoMapperDTO.Controllers
         {
             try
             {
-                int c = userRepostories.Count();
-                return c;
+                int totalCount = userRepostories.Count();
+                return totalCount;
             }
             catch (Exception)
             {

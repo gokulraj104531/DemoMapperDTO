@@ -50,6 +50,20 @@ namespace DemoMapperDTO.Controllers
             }
         }
 
+
+        [HttpGet,Route("GetAllDetails")]
+        public IActionResult GetAllDetails()
+        {
+            try
+            {
+                return StatusCode(200, userRepostories.GetAllDetails());
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500,ex.Message);
+            }
+        }
+
         [HttpGet, Route("GetUsers/{id}")]
         public UserDTO GetUsersById(int id)
         {

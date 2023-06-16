@@ -46,10 +46,12 @@ namespace DemoMapperDTO.Repositories
                 throw;
             }
         }
-        public void Delete(UserRegisteration userRegisteration)
+        public void Delete(int id)
         {
             try
             {
+
+                UserRegisteration userRegisteration = _dbContext.userRegisterations.Find(id);
                 _dbContext.Remove(userRegisteration);
                 _dbContext.SaveChanges();
             }
@@ -59,6 +61,7 @@ namespace DemoMapperDTO.Repositories
             }
         }
 
+        //Only certain details will be displayed
         public UserDTO GetUsersById(int id)
         {
             var users = _dbContext.userRegisterations.Find(id);
@@ -66,10 +69,24 @@ namespace DemoMapperDTO.Repositories
              
         }
 
+        //Only certain details will be displayed
         public async Task<List<UserDTO>> GetUsers()
         {
             var usersid = await _dbContext.userRegisterations.ToListAsync();
             return _mapper.Map<List<UserDTO>>(usersid);
+        }
+
+        public  List<UserRegisteration> GetAllDetails()
+        {
+            try
+            {
+                List<UserRegisteration> userRegisterations = _dbContext.userRegisterations.ToList();
+                return userRegisterations;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
         }
     }
 }

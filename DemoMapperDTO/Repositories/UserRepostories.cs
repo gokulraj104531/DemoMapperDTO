@@ -59,17 +59,17 @@ namespace DemoMapperDTO.Repositories
             }
         }
 
-        public async Task<UserDTO> GetUsersById(int id)
+        public UserDTO GetUsersById(int id)
         {
-            var users =await _dbContext.userRegisterations.FindAsync(id);
+            var users = _dbContext.userRegisterations.Find(id);
             return  _mapper.Map<UserDTO>(users);
              
         }
 
         public async Task<List<UserDTO>> GetUsers()
         {
-            var users = await _dbContext.userRegisterations.ToListAsync();
-            return _mapper.Map<List<UserDTO>>(users);
+            var usersid = await _dbContext.userRegisterations.ToListAsync();
+            return _mapper.Map<List<UserDTO>>(usersid);
         }
     }
 }

@@ -52,11 +52,12 @@ namespace DemoMapperDTO.Controllers
         }
 
         [HttpGet, Route("GetUsers/{id}")]
-        public Task<List<UserDTO>> GetUsersById()
+        public UserDTO GetUsersById(int id)
         {
             try
             {
-                return userRepostories.GetUsers();
+                UserDTO userRegisteration=userRepostories.GetUsersById(id);
+                return userRegisteration;
             }
             catch (Exception)
             {

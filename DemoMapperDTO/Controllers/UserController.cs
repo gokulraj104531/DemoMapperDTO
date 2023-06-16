@@ -6,7 +6,7 @@ using AutoMapper;
 using DemoMapperDTO.Data;
 using Microsoft.EntityFrameworkCore;
 using DemoMapperDTO.Repositories;
-
+using DemoMapperDTO.Services;
 
 namespace DemoMapperDTO.Controllers
 {
@@ -15,11 +15,13 @@ namespace DemoMapperDTO.Controllers
     public class UserController : ControllerBase
     {
         public UserRepoistories userRepostories;
+        public UserServices userServices;
 
 
         public UserController(UserRepoistories _userRepostories)
         {
             this.userRepostories = _userRepostories;
+            
         }
 
         [HttpPost]
@@ -112,7 +114,7 @@ namespace DemoMapperDTO.Controllers
         {
             try
             {
-                int totalCount = userRepostories.Count();
+                int totalCount = userServices.Count();
                 return totalCount;
             }
             catch (Exception)

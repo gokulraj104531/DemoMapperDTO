@@ -7,6 +7,7 @@ using DemoMapperDTO.Data;
 using Microsoft.EntityFrameworkCore;
 using DemoMapperDTO.Repositories;
 
+
 namespace DemoMapperDTO.Controllers
 {
     [Route("api/[controller]")]
@@ -14,7 +15,7 @@ namespace DemoMapperDTO.Controllers
     public class UserController : ControllerBase
     {
         public UserRepostories userRepostories;
-       
+
 
         public UserController(UserRepostories _userRepostories)
         {
@@ -36,10 +37,8 @@ namespace DemoMapperDTO.Controllers
             }
         }
 
-
-        
-        [HttpGet,Route("GetUsers")]
-        public  Task<List<UserDTO>> GetUsers()
+        [HttpGet, Route("GetUsers")]
+        public Task<List<UserDTO>> GetUsers()
         {
             try
             {
@@ -54,14 +53,44 @@ namespace DemoMapperDTO.Controllers
         [HttpGet, Route("GetUsers/{id}")]
         public UserDTO GetUsersById(int id)
         {
+
             try
             {
-                UserDTO userRegisteration=userRepostories.GetUsersById(id);
+                UserDTO userRegisteration = userRepostories.GetUsersById(id);
                 return userRegisteration;
+
             }
             catch (Exception)
             {
                 throw;
+            }
+        }
+
+        [HttpPut, Route("EditUser")]
+        public IActionResult Edit(UserRegisteration userRegisteration)
+        {
+            try
+            {
+                userRepostories.Update(userRegisteration);
+                return StatusCode(200, userRegisteration);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+        
+        [HttpDelete, Route("DeleteUser/{id}")]
+        public IActionResult Delete(int id)
+        {
+            try
+            {
+                userRepostories.Delete(id);
+                return StatusCode(200, "User Deleted");
+            }
+            catch(Exception ex)
+            {
+                return StatusCode(500,ex.Message);
             }
         }
 

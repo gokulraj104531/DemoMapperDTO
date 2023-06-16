@@ -10,12 +10,12 @@ using Microsoft.EntityFrameworkCore;
 namespace DemoMapperDTO.Repositories
 
 {
-    public class UserServices
+    public class UserRepoistories
     {
         private readonly ApplicationDbContext _dbContext;
         private readonly IMapper _mapper;
 
-        public UserServices(ApplicationDbContext dbContext, IMapper mapper)
+        public UserRepoistories(ApplicationDbContext dbContext, IMapper mapper)
         {
             _dbContext = dbContext;
             _mapper = mapper;
@@ -88,18 +88,6 @@ namespace DemoMapperDTO.Repositories
                 throw;
             }
         }
-        public int Count()
-        {
-            try
-            {
-                int totalCount = _dbContext.userRegisterations.Count();
-                return totalCount;
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
+        
     }
 }

@@ -2,6 +2,7 @@ using DemoMapperDTO.Data;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using DemoMapperDTO.Repositories;
+using DemoMapperDTO.Services;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -12,6 +13,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddAutoMapper(typeof(Program));
+builder.Services.AddTransient<UserRepoistories>();
 builder.Services.AddTransient<UserServices>();
 var app = builder.Build();
 

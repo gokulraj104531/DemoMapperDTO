@@ -8,6 +8,7 @@ namespace DemoMapperDTO.Profiles
     {
         public MapperProfile()
         {
+            CreateMap<UserDTO, UserRegisteration>();
             CreateMap<UserRegisteration,UserDTO>();
         }
     }

@@ -14,26 +14,23 @@ namespace DemoMapperDTO.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private readonly UserRepoistories userRepostories;
+        
         private readonly UserServices userServices;
 
 
-        public UserController(UserRepoistories _userRepostories,UserServices User)
+        public UserController(UserServices User)
         {
-            this.userRepostories = _userRepostories;
             this.userServices =User;
-            
-            
         }
 
         [HttpPost]
         [Route("AddUser")]
-        public IActionResult AddUser(UserRegisteration userRegisteration)
+        public IActionResult AddUser(UserDTO userdto)
         {
             try
             {
-                userRepostories.Add(userRegisteration);
-                return StatusCode(200, userRegisteration);
+                userServices.AddServices(userdto);
+                return StatusCode(200, userdto);
             }
             catch (Exception ex)
             {
@@ -42,11 +39,11 @@ namespace DemoMapperDTO.Controllers
         }
 
         [HttpGet, Route("GetUsers")]
-        public Task<List<UserDTO>> GetUsers()
+        public List<UserDTO> GetUsers()
         {
             try
             {
-                return userRepostories.GetUsers();
+                return userServices.GetUsers();
             }
             catch (Exception)
             {
@@ -55,18 +52,18 @@ namespace DemoMapperDTO.Controllers
         }
 
 
-        [HttpGet,Route("GetAllDetails")]
-        public IActionResult GetAllDetails()
-        {
-            try
-            {
-                return StatusCode(200, userRepostories.GetAllDetails());
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500,ex.Message);
-            }
-        }
+        //[HttpGet,Route("GetAllDetails")]
+        //public IActionResult GetAllDetails()
+        //{
+        //    try
+        //    {
+        //        return StatusCode(200, userServices.GetAllDetails());
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return StatusCode(500,ex.Message);
+        //    }
+        //}
 
         [HttpGet, Route("GetUsers/{id}")]
         public UserDTO GetUsersById(int id)
@@ -74,9 +71,7 @@ namespace DemoMapperDTO.Controllers
 
             try
             {
-                UserDTO userRegisteration = userRepostories.GetUsersById(id);
-                return userRegisteration;
-
+                return userServices.GetUserById(id);
             }
             catch (Exception)
             {
@@ -85,12 +80,12 @@ namespace DemoMapperDTO.Controllers
         }
 
         [HttpPut, Route("EditUser")]
-        public IActionResult Edit(UserRegisteration userRegisteration)
+        public IActionResult Edit(UserDTO userdto)
         {
             try
             {
-                userRepostories.Update(userRegisteration);
-                return StatusCode(200, userRegisteration);
+                userServices.Update(userdto);
+                return StatusCode(200, userdto);
             }
             catch (Exception ex)
             {
@@ -103,7 +98,7 @@ namespace DemoMapperDTO.Controllers
         {
             try
             {
-                userRepostories.Delete(id);
+                userServices.Delete(id);
                 return StatusCode(200, "User Deleted");
             }
             catch(Exception ex)
@@ -121,7 +116,6 @@ namespace DemoMapperDTO.Controllers
             }
             catch (Exception)
             {
-
                 throw;
             }
         }

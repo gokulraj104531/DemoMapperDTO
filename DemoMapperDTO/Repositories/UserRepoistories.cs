@@ -13,18 +13,17 @@ namespace DemoMapperDTO.Repositories
     public class UserRepoistories
     {
         private readonly ApplicationDbContext _dbContext;
-        private readonly IMapper _mapper;
 
-        public UserRepoistories(ApplicationDbContext dbContext, IMapper mapper)
+        public UserRepoistories(ApplicationDbContext dbContext)
         {
             _dbContext = dbContext;
-            _mapper = mapper;
         }
 
         public void Add(UserRegisteration userRegisteration)
         {
             try
             {
+                
                 _dbContext.userRegisterations.Add(userRegisteration);
                 _dbContext.SaveChanges();
             }
@@ -61,33 +60,31 @@ namespace DemoMapperDTO.Repositories
             }
         }
 
-        //Only certain details will be displayed
-        public UserDTO GetUsersById(int id)
-        {
-            var users = _dbContext.userRegisterations.Find(id);
-            return  _mapper.Map<UserDTO>(users);
-             
-        }
-
-        //Only certain details will be displayed
-        public async Task<List<UserDTO>> GetUsers()
-        {
-            var usersid = await _dbContext.userRegisterations.ToListAsync();
-            return _mapper.Map<List<UserDTO>>(usersid);
-        }
-
-        public  List<UserRegisteration> GetAllDetails()
+        public List<UserRegisteration> GetUsers()
         {
             try
             {
-                List<UserRegisteration> userRegisterations = _dbContext.userRegisterations.ToList();
-                return userRegisterations;
+                List<UserRegisteration> usersid = _dbContext.userRegisterations.ToList();
+                return usersid;
             }
             catch (Exception ex)
             {
                 throw;
             }
         }
-        
+        public UserRegisteration GetUsersById(int id)
+        {
+            try
+            {
+                var users = _dbContext.userRegisterations.Find(id);
+                return users;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
     }
 }

@@ -50,7 +50,7 @@ namespace DemoMapperDTO.Repositories
             try
             {
 
-                UserRegisteration userRegisteration = _dbContext.userRegisterations.Find(id);
+                 UserRegisteration userRegisteration = _dbContext.userRegisterations.Find(id);
                 _dbContext.Remove(userRegisteration);
                 _dbContext.SaveChanges();
             }

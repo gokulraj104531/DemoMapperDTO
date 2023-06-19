@@ -52,7 +52,6 @@ namespace DemoMapperDTO.Services
             {
                 UserRegisteration userRegisteration=_mapper.Map<UserRegisteration>(userdto);
                 userRepostories.Update(userRegisteration);
-
             }
             catch (Exception)
             {
@@ -66,7 +65,6 @@ namespace DemoMapperDTO.Services
             try
             {
                 userRepostories.Delete(id);
-
             }
             catch (Exception)
             {

@@ -55,7 +55,6 @@ namespace DemoMapperDTO.Services
             }
             catch (Exception)
             {
-
                 throw;
             }
         }

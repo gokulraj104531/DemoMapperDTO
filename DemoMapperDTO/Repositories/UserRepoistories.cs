@@ -23,7 +23,6 @@ namespace DemoMapperDTO.Repositories
         {
             try
             {
-                
                 _dbContext.userRegisterations.Add(userRegisteration);
                 _dbContext.SaveChanges();
             }
@@ -49,7 +48,6 @@ namespace DemoMapperDTO.Repositories
         {
             try
             {
-
                  UserRegisteration userRegisteration = _dbContext.userRegisterations.Find(id);
                 _dbContext.Remove(userRegisteration);
                 _dbContext.SaveChanges();

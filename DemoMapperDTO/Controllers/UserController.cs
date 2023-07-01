@@ -94,16 +94,16 @@ namespace DemoMapperDTO.Controllers
         }
         
         [HttpDelete, Route("DeleteUser/{id}")]
-        public IActionResult Delete(int id)
+        public void Delete(int id)
         {
             try
             {
                 userServices.Delete(id);
-                return StatusCode(200, "User Deleted");
+               // return StatusCode(200, "User Deleted");
             }
             catch(Exception ex)
             {
-                return StatusCode(500,ex.Message);
+                //return StatusCode(500,ex.Message);
             }
         }
         [HttpGet, Route("Count")]

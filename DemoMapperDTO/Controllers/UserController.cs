@@ -7,6 +7,7 @@ using DemoMapperDTO.Data;
 using Microsoft.EntityFrameworkCore;
 using DemoMapperDTO.Repositories;
 using DemoMapperDTO.Services;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DemoMapperDTO.Controllers
 {
@@ -14,13 +15,29 @@ namespace DemoMapperDTO.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        
+        private readonly ApplicationDbContext _dbContext;
         private readonly UserServices userServices;
 
 
-        public UserController(UserServices User)
+        public UserController(UserServices User,ApplicationDbContext dbContext)
         {
             this.userServices =User;
+            _dbContext = dbContext;
+        }
+
+        [HttpPost("Authenticate")]
+        public async Task<IActionResult> Authenticate([FromBody]Loginmodel loginmodel)
+        {
+            if(loginmodel == null)
+            {
+                return BadRequest();
+            }
+            var user=await _dbContext.userRegisterations.FirstOrDefaultAsync(x=> x.UserName == loginmodel.UserName && x.Password==loginmodel.Password);
+            if(user == null)
+            {
+                return BadRequest();
+            }
+            return Ok("Success");
         }
 
         [HttpPost]

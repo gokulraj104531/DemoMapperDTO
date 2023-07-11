@@ -8,6 +8,7 @@ namespace DemoMapperDTO.Services
 {
     public class UserServices
     {
+        //here i just used appdb context for some purpose here it should not be used in the sevices
         private readonly ApplicationDbContext _dbContext;
         private readonly UserRepoistories userRepostories;
         private readonly IMapper _mapper;
